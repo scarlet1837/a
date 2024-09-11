@@ -20,6 +20,7 @@ function GUI_Library:CreateWindow(options)
         closeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
         closeButton.Position = UDim2.new(0.9, 0, 0, 0)
         closeButton.Text = "X"
+        closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
         closeButton.Parent = frame
         closeButton.MouseButton1Click:Connect(function()
@@ -33,6 +34,7 @@ function GUI_Library:CreateWindow(options)
         minimizeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
         minimizeButton.Position = UDim2.new(0.8, 0, 0, 0)
         minimizeButton.Text = "-"
+        minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         minimizeButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
         minimizeButton.Parent = frame
         minimizeButton.MouseButton1Click:Connect(function()
@@ -51,8 +53,9 @@ function GUI_Library:CreateWindow(options)
         local tabTitle = Instance.new("TextLabel")
         tabTitle.Size = UDim2.new(1, 0, 0.1, 0)
         tabTitle.Text = title
-        tabTitle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
         tabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        tabTitle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        tabTitle.TextSize = 24
         tabTitle.Parent = tab
 
         -- Sections
@@ -66,8 +69,9 @@ function GUI_Library:CreateWindow(options)
             local sectionTitle = Instance.new("TextLabel")
             sectionTitle.Size = UDim2.new(1, 0, 0.1, 0)
             sectionTitle.Text = name
-            sectionTitle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
             sectionTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+            sectionTitle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            sectionTitle.TextSize = 20
             sectionTitle.Parent = section
 
             -- Labels
@@ -80,16 +84,18 @@ function GUI_Library:CreateWindow(options)
                 local labelTitle = Instance.new("TextLabel")
                 labelTitle.Size = UDim2.new(1, 0, 0.5, 0)
                 labelTitle.Text = title
-                labelTitle.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
                 labelTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+                labelTitle.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                labelTitle.TextSize = 18
                 labelTitle.Parent = label
 
                 local labelDescription = Instance.new("TextLabel")
                 labelDescription.Size = UDim2.new(1, 0, 0.5, 0)
                 labelDescription.Position = UDim2.new(0, 0, 0.5, 0)
                 labelDescription.Text = description
-                labelDescription.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
                 labelDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
+                labelDescription.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+                labelDescription.TextSize = 16
                 labelDescription.Parent = label
             end
 
@@ -98,8 +104,9 @@ function GUI_Library:CreateWindow(options)
                 local button = Instance.new("TextButton")
                 button.Size = UDim2.new(1, 0, 0.1, 0)
                 button.Text = title
-                button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
                 button.TextColor3 = Color3.fromRGB(255, 255, 255)
+                button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                button.TextSize = 18
                 button.Parent = section
                 button.MouseButton1Click:Connect(callback)
             end
