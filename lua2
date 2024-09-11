@@ -1,0 +1,20 @@
+-- Fetch and execute the GUI library
+local GUI_Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/scarlet1837/a/main/Lua", true))()
+
+-- Create the window using the GUI library
+local window = GUI_Library:CreateWindow({
+    ScriptName = "My GUI Template",
+    Theme = "Dark",
+    CloseButton = true,
+    MinimizeButton = true
+})
+
+-- Create a tab and section within the window
+local tab = window:CreateTab("Main Tab")
+local section = tab:CreateSection("Main Section")
+
+-- Add a label and button to the section
+section:AddLabel("Welcome", "This is a customizable label")
+section:AddButton("Click Me", "This button does something", function()
+    print("Button was clicked!")
+end)
