@@ -1,0 +1,163 @@
+-- GUI_Library.lua
+
+local GUI_Library = {}
+
+-- Helper function to create a UI corner (rounded corners)
+local function createUICorner(instance, cornerRadius)
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(cornerRadius or 0.1, 0) -- Adjust corner radius if needed
+    uiCorner.Parent = instance
+end
+
+-- Create a new window
+function GUI_Library:CreateWindow(options)
+    local window = Instance.new("ScreenGui")
+    window.Name = options.ScriptName or "Window"
+    window.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    frame.BackgroundColor3 = options.Theme == "Dark" and Color3.fromRGB(30, 30, 30) or Color3.fromRGB(255, 255, 255)
+    frame.BorderSizePixel = 0
+    frame.ClipsDescendants = true -- Keeps elements within frame bounds
+    frame.Parent = window
+
+    -- Add rounded corners to the frame
+    createUICorner(frame, 0.05)
+
+    -- Close Button
+    if options.CloseButton then
+        local closeButton = Instance.new("TextButton")
+        closeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+        closeButton.Position = UDim2.new(0.9, 0, 0, 0)
+        closeButton.Text = "X"
+        closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+        closeButton.BorderSizePixel = 0
+        closeButton.Parent = frame
+
+        -- Add rounded corners to the close button
+        createUICorner(closeButton, 0.2)
+
+        closeButton.MouseButton1Click:Connect(function()
+            window:Destroy()
+        end)
+    end
+
+    -- Minimize Button
+    if options.MinimizeButton then
+        local minimizeButton = Instance.new("TextButton")
+        minimizeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+        minimizeButton.Position = UDim2.new(0.8, 0, 0, 0)
+        minimizeButton.Text = "-"
+        minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        minimizeButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+        minimizeButton.BorderSizePixel = 0
+        minimizeButton.Parent = frame
+
+        -- Add rounded corners to the minimize button
+        createUICorner(minimizeButton, 0.2)
+
+        minimizeButton.MouseButton1Click:Connect(function()
+            frame.Visible = not frame.Visible
+        end)
+    end
+
+    -- Tabs
+    function window:CreateTab(title)
+        local tab = Instance.new("Frame")
+        tab.Size = UDim2.new(1, 0, 1, 0)
+        tab.Position = UDim2.new(0, 0, 0, 0)
+        tab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        tab.BorderSizePixel = 0
+        tab.Parent = frame
+
+        -- Add rounded corners to the tab
+        createUICorner(tab, 0.05)
+
+        local tabTitle = Instance.new("TextLabel")
+        tabTitle.Size = UDim2.new(1, 0, 0.1, 0)
+        tabTitle.Text = title
+        tabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        tabTitle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        tabTitle.TextSize = 24
+        tabTitle.BorderSizePixel = 0
+        tabTitle.Parent = tab
+
+        -- Sections
+        function tab:CreateSection(name)
+            local section = Instance.new("Frame")
+            section.Size = UDim2.new(1, 0, 0.9, 0)
+            section.Position = UDim2.new(0, 0, 0.1, 0)
+            section.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            section.BorderSizePixel = 0
+            section.Parent = tab
+
+            -- Add rounded corners to the section
+            createUICorner(section, 0.05)
+
+            local sectionTitle = Instance.new("TextLabel")
+            sectionTitle.Size = UDim2.new(1, 0, 0.1, 0)
+            sectionTitle.Text = name
+            sectionTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+            sectionTitle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            sectionTitle.TextSize = 20
+            sectionTitle.BorderSizePixel = 0
+            sectionTitle.Parent = section
+
+            -- Labels
+            function section:AddLabel(title, description)
+                local label = Instance.new("TextLabel")
+                label.Size = UDim2.new(1, 0, 0.1, 0)
+                label.Text = title
+                label.TextColor3 = Color3.fromRGB(255, 255, 255)
+                label.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                label.TextSize = 18
+                label.BorderSizePixel = 0
+                label.Parent = section
+
+                -- Add rounded corners to the label
+                createUICorner(label, 0.05)
+
+                local descriptionLabel = Instance.new("TextLabel")
+                descriptionLabel.Size = UDim2.new(1, 0, 0.1, 0)
+                descriptionLabel.Position = UDim2.new(0, 0, 0.5, 0)
+                descriptionLabel.Text = description
+                descriptionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+                descriptionLabel.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+                descriptionLabel.TextSize = 16
+                descriptionLabel.BorderSizePixel = 0
+                descriptionLabel.Parent = label
+
+                -- Add rounded corners to the description
+                createUICorner(descriptionLabel, 0.05)
+            end
+
+            -- Buttons
+            function section:AddButton(title, description, callback)
+                local button = Instance.new("TextButton")
+                button.Size = UDim2.new(1, 0, 0.1, 0)
+                button.Text = title
+                button.TextColor3 = Color3.fromRGB(255, 255, 255)
+                button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                button.TextSize = 18
+                button.BorderSizePixel = 0
+                button.Parent = section
+
+                -- Add rounded corners to the button
+                createUICorner(button, 0.1)
+
+                button.MouseButton1Click:Connect(callback)
+            end
+
+            return section
+        end
+
+        return tab
+    end
+
+    return window
+end
+
+return GUI_Library
