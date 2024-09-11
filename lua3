@@ -1,5 +1,3 @@
--- GUI_Library.lua
-
 local GUI_Library = {}
 
 -- Helper function to create a UI corner (rounded corners)
