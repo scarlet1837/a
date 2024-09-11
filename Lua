@@ -1,0 +1,116 @@
+-- GUI_Library.lua
+
+local GUI_Library = {}
+
+-- Create a new window
+function GUI_Library:CreateWindow(options)
+    local window = Instance.new("ScreenGui")
+    window.Name = options.ScriptName or "Window"
+    window.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    frame.BackgroundColor3 = options.Theme == "Dark" and Color3.fromRGB(30, 30, 30) or Color3.fromRGB(255, 255, 255)
+    frame.Parent = window
+
+    -- Close Button
+    if options.CloseButton then
+        local closeButton = Instance.new("TextButton")
+        closeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+        closeButton.Position = UDim2.new(0.9, 0, 0, 0)
+        closeButton.Text = "X"
+        closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+        closeButton.Parent = frame
+        closeButton.MouseButton1Click:Connect(function()
+            window:Destroy()
+        end)
+    end
+
+    -- Minimize Button
+    if options.MinimizeButton then
+        local minimizeButton = Instance.new("TextButton")
+        minimizeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+        minimizeButton.Position = UDim2.new(0.8, 0, 0, 0)
+        minimizeButton.Text = "-"
+        minimizeButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+        minimizeButton.Parent = frame
+        minimizeButton.MouseButton1Click:Connect(function()
+            frame.Visible = not frame.Visible
+        end)
+    end
+
+    -- Tabs
+    function window:CreateTab(title)
+        local tab = Instance.new("Frame")
+        tab.Size = UDim2.new(1, 0, 1, 0)
+        tab.Position = UDim2.new(0, 0, 0, 0)
+        tab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        tab.Parent = frame
+
+        local tabTitle = Instance.new("TextLabel")
+        tabTitle.Size = UDim2.new(1, 0, 0.1, 0)
+        tabTitle.Text = title
+        tabTitle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        tabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        tabTitle.Parent = tab
+
+        -- Sections
+        function tab:CreateSection(name)
+            local section = Instance.new("Frame")
+            section.Size = UDim2.new(1, 0, 0.9, 0)
+            section.Position = UDim2.new(0, 0, 0.1, 0)
+            section.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            section.Parent = tab
+
+            local sectionTitle = Instance.new("TextLabel")
+            sectionTitle.Size = UDim2.new(1, 0, 0.1, 0)
+            sectionTitle.Text = name
+            sectionTitle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            sectionTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+            sectionTitle.Parent = section
+
+            -- Labels
+            function section:AddLabel(title, description)
+                local label = Instance.new("Frame")
+                label.Size = UDim2.new(1, 0, 0.1, 0)
+                label.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                label.Parent = section
+
+                local labelTitle = Instance.new("TextLabel")
+                labelTitle.Size = UDim2.new(1, 0, 0.5, 0)
+                labelTitle.Text = title
+                labelTitle.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                labelTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+                labelTitle.Parent = label
+
+                local labelDescription = Instance.new("TextLabel")
+                labelDescription.Size = UDim2.new(1, 0, 0.5, 0)
+                labelDescription.Position = UDim2.new(0, 0, 0.5, 0)
+                labelDescription.Text = description
+                labelDescription.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+                labelDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
+                labelDescription.Parent = label
+            end
+
+            -- Buttons
+            function section:AddButton(title, description, callback)
+                local button = Instance.new("TextButton")
+                button.Size = UDim2.new(1, 0, 0.1, 0)
+                button.Text = title
+                button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+                button.TextColor3 = Color3.fromRGB(255, 255, 255)
+                button.Parent = section
+                button.MouseButton1Click:Connect(callback)
+            end
+
+            return section
+        end
+
+        return tab
+    end
+
+    return window
+end
+
+return GUI_Library
