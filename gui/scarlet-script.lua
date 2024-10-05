@@ -11,9 +11,6 @@ scarletbackup#3582
 This gui Works For Pc And Mobile
 
 ]]--
--- Scarlet Script Customizable GUI Library with Tabs (Permanent label "Created by Scarlet Script")
--- Scarlet Script Customizable GUI Library with Tabs
-
 local GUILibrary = {}
 
 -- Table to store the current GUI elements
@@ -31,12 +28,10 @@ function GUILibrary:CreateMainGUI(titleText)
     local mainFrame = Instance.new("Frame")
     mainFrame.Size = UDim2.new(0, 400, 0, 300)
     mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
-    mainFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 28) -- Darker color for main frame
+    mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     mainFrame.BorderSizePixel = 0
-    mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
     mainFrame.Parent = screenGui
 
-    -- Apply rounded corners to the main frame
     local mainFrameCorner = Instance.new("UICorner")
     mainFrameCorner.CornerRadius = UDim.new(0, 10)
     mainFrameCorner.Parent = mainFrame
@@ -47,7 +42,7 @@ function GUILibrary:CreateMainGUI(titleText)
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
     title.TextSize = 18
-    title.BackgroundColor3 = Color3.fromRGB(18, 18, 20)
+    title.BackgroundColor3 = Color3.fromRGB(24, 24, 34)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
     title.Parent = mainFrame
@@ -56,9 +51,13 @@ function GUILibrary:CreateMainGUI(titleText)
     local sidebar = Instance.new("Frame")
     sidebar.Size = UDim2.new(0, 100, 1, -30)
     sidebar.Position = UDim2.new(0, 0, 0, 30)
-    sidebar.BackgroundColor3 = Color3.fromRGB(30, 30, 36)
+    sidebar.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
     sidebar.BorderSizePixel = 0
     sidebar.Parent = mainFrame
+
+    local sidebarCorner = Instance.new("UICorner")
+    sidebarCorner.CornerRadius = UDim.new(0, 10)
+    sidebarCorner.Parent = sidebar
 
     -- Permanent "Created by Scarlet Script" label
     local permanentLabel = Instance.new("TextLabel")
@@ -72,38 +71,8 @@ function GUILibrary:CreateMainGUI(titleText)
     permanentLabel.BorderSizePixel = 0
     permanentLabel.Parent = mainFrame
 
-    -- Make the main frame draggable
-    makeDraggable(mainFrame, title)
-
     -- Return the sidebar and main frame for creating tabs
     return screenGui, sidebar, mainFrame
-end
-
--- Function to make the GUI draggable
-local function makeDraggable(guiObject, dragHandle)
-    local UIS = game:GetService("UserInputService")
-    local dragging, dragStart, startPos
-
-    dragHandle.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = guiObject.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    dragHandle.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            local delta = input.Position - dragStart
-            guiObject.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
-    end)
 end
 
 -- Function to create a new tab
@@ -116,22 +85,20 @@ function GUILibrary:CreateTab(tabName, sidebar, mainFrame)
     tabButton.Font = Enum.Font.Gotham
     tabButton.TextSize = 14
     tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    tabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
-    tabButton.BorderSizePixel = 0
+    tabButton.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
     tabButton.Parent = sidebar
 
-    -- Apply rounded corners to the tab button
     local tabButtonCorner = Instance.new("UICorner")
     tabButtonCorner.CornerRadius = UDim.new(0, 8)
     tabButtonCorner.Parent = tabButton
 
     -- Create a scroll frame for this tab's content
     local tabContent = Instance.new("ScrollingFrame")
-    tabContent.Size = UDim2.new(1, -100, 1, -50)
+    tabContent.Size = UDim2.new(1, -100, 1, -30)
     tabContent.Position = UDim2.new(0, 100, 0, 30)
     tabContent.CanvasSize = UDim2.new(0, 0, 2, 0)
     tabContent.ScrollBarThickness = 6
-    tabContent.BackgroundColor3 = Color3.fromRGB(36, 36, 40)
+    tabContent.BackgroundColor3 = Color3.fromRGB(36, 36, 46)
     tabContent.BorderSizePixel = 0
     tabContent.Parent = mainFrame
     tabContent.Visible = false
@@ -149,6 +116,40 @@ function GUILibrary:CreateTab(tabName, sidebar, mainFrame)
     end)
 
     return tabContent
+end
+
+-- Function to add a button to a specific tab
+function GUILibrary:CreateButton(text, parent, callback)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 200, 0, 40)
+    button.Position = UDim2.new(0, 10, 0, #parent:GetChildren() * 50) -- Automatically space buttons
+    button.Text = text
+    button.Font = Enum.Font.Gotham
+    button.TextSize = 14
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    button.Parent = parent
+
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 8)
+    buttonCorner.Parent = button
+
+    -- Connect the button click to the provided callback
+    button.MouseButton1Click:Connect(function()
+        if callback then
+            callback()
+        end
+    end)
+end
+
+-- Function to rename the GUI title
+function GUILibrary:RenameGUI(newTitle)
+    if activeGUI and activeGUI:FindFirstChild("Frame") then
+        local title = activeGUI.Frame:FindFirstChild("TextLabel")
+        if title then
+            title.Text = newTitle
+        end
+    end
 end
 
 -- Function to show the first tab on start
