@@ -26,8 +26,8 @@ function GUILibrary:CreateMainGUI(titleText)
 
     -- Main frame
     local mainFrame = Instance.new("Frame")
-    mainFrame.Size = UDim2.new(0, 400, 0, 300) -- Height of 300
-    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    mainFrame.Size = UDim2.new(0, 400, 0, 350) -- Adjust height to fit all elements
+    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -175) -- Center the frame
     mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     mainFrame.BorderSizePixel = 0
     mainFrame.Active = true
@@ -38,13 +38,13 @@ function GUILibrary:CreateMainGUI(titleText)
     mainFrameCorner.CornerRadius = UDim.new(0, 10)
     mainFrameCorner.Parent = mainFrame
 
-    -- Title label for the GUI title
+    -- Title label
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 40) -- Height of 40
-    title.Position = UDim2.new(0, 0, 0, 20) -- Position it below the top
+    title.Size = UDim2.new(1, 0, 0, 30) -- Make the width 100%
+    title.Position = UDim2.new(0, 0, 0, 0) -- Position it at the top
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
-    title.TextSize = 20 -- Increased text size for better visibility
+    title.TextSize = 18
     title.BackgroundColor3 = Color3.fromRGB(24, 24, 34)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
@@ -62,17 +62,25 @@ function GUILibrary:CreateMainGUI(titleText)
     sidebarCorner.CornerRadius = UDim.new(0, 10)
     sidebarCorner.Parent = sidebar
 
-    -- "Created by" label positioned at the bottom
-    local createdByLabel = Instance.new("TextLabel")
-    createdByLabel.Size = UDim2.new(1, 0, 0, 20) -- Full width
-    createdByLabel.Position = UDim2.new(0, 0, 1, -20) -- Position it at the bottom
-    createdByLabel.Text = "Created by https://discord.gg/pTmc8uEqJr"
-    createdByLabel.Font = Enum.Font.Gotham
-    createdByLabel.TextSize = 12 -- Slightly larger for better visibility
-    createdByLabel.BackgroundTransparency = 1
-    createdByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    createdByLabel.BorderSizePixel = 0
-    createdByLabel.Parent = mainFrame
+    -- Permanent "Created by Scarlet Script" label
+    local permanentLabel = Instance.new("TextLabel")
+    permanentLabel.Size = UDim2.new(1, 0, 0, 20)
+    permanentLabel.Position = UDim2.new(0, 0, 1, -20) -- Positioned at the bottom
+    permanentLabel.Text = "Created by Scarlet Script"
+    permanentLabel.Font = Enum.Font.Gotham
+    permanentLabel.TextSize = 10  -- Reduced text size
+    permanentLabel.BackgroundTransparency = 1
+    permanentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    permanentLabel.BorderSizePixel = 0
+    permanentLabel.Parent = mainFrame
+
+    -- Ensure there's enough space for the content frames
+    local contentFrame = Instance.new("Frame")
+    contentFrame.Size = UDim2.new(1, -100, 1, -60) -- Adjust height to leave room for the permanent label
+    contentFrame.Position = UDim2.new(0, 100, 0, 30)
+    contentFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 46)
+    contentFrame.BorderSizePixel = 0
+    contentFrame.Parent = mainFrame
 
     -- Return the sidebar and main frame for creating tabs
     return screenGui, sidebar, mainFrame
