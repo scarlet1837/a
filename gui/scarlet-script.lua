@@ -77,10 +77,13 @@ end
 
 -- Function to create a new tab
 function GUILibrary:CreateTab(tabName, sidebar, mainFrame)
+    -- Calculate Y position for the new tab based on the number of existing tabs
+    local yOffset = (#tabs) * 40 + 10 -- Space between tabs and offset from the top
+
     -- Create a tab button in the sidebar
     local tabButton = Instance.new("TextButton")
     tabButton.Size = UDim2.new(0, 80, 0, 30)
-    tabButton.Position = UDim2.new(0, 10, 0, #sidebar:GetChildren() * 40)
+    tabButton.Position = UDim2.new(0, 10, 0, yOffset)
     tabButton.Text = tabName
     tabButton.Font = Enum.Font.Gotham
     tabButton.TextSize = 14
