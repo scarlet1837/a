@@ -26,7 +26,7 @@ function GUILibrary:CreateMainGUI(titleText)
 
     -- Main frame positioned at the top
     local mainFrame = Instance.new("Frame")
-    mainFrame.Size = UDim2.new(0, 400, 0, 300)
+    mainFrame.Size = UDim2.new(0, 400, 0, 300) -- Adjust this size if needed
     mainFrame.Position = UDim2.new(0.5, -200, 0, 10) -- Positioned at the top of the screen
     mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     mainFrame.BorderSizePixel = 0
