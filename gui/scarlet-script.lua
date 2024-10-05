@@ -38,22 +38,10 @@ function GUILibrary:CreateMainGUI(titleText)
     mainFrameCorner.CornerRadius = UDim.new(0, 10)
     mainFrameCorner.Parent = mainFrame
 
-    -- Title label for the "Created by" message
-    local createdByLabel = Instance.new("TextLabel")
-    createdByLabel.Size = UDim2.new(1, 0, 0, 20) -- Full width
-    createdByLabel.Position = UDim2.new(0, 0, 0, 0) -- Position it at the top
-    createdByLabel.Text = "Created by https://discord.gg/pTmc8uEqJr"
-    createdByLabel.Font = Enum.Font.Gotham
-    createdByLabel.TextSize = 10
-    createdByLabel.BackgroundTransparency = 1
-    createdByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    createdByLabel.BorderSizePixel = 0
-    createdByLabel.Parent = mainFrame
-
-    -- Title label
+    -- Title label for the GUI title
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 40) -- Increased height to 40
-    title.Position = UDim2.new(0, 0, 0, 20) -- Position it below the created by label
+    title.Size = UDim2.new(1, 0, 0, 40) -- Height of 40
+    title.Position = UDim2.new(0, 0, 0, 20) -- Position it below the top
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
     title.TextSize = 20 -- Increased text size for better visibility
@@ -73,6 +61,19 @@ function GUILibrary:CreateMainGUI(titleText)
     local sidebarCorner = Instance.new("UICorner")
     sidebarCorner.CornerRadius = UDim.new(0, 10)
     sidebarCorner.Parent = sidebar
+
+    -- "Created by" label positioned at the bottom
+    local createdByLabel = Instance.new("TextLabel")
+    createdByLabel.Size = UDim2.new(1, 0, 0, 20) -- Full width
+    createdByLabel.Position = UDim2.new(0, 0, 1, -20) -- Position it at the bottom
+    createdByLabel.Text = "Created by https://discord.gg/pTmc8uEqJr"
+    createdByLabel.Font = Enum.Font.Gotham
+    createdByLabel.TextSize = 12 -- Slightly larger for better visibility
+    createdByLabel.BackgroundTransparency = 1
+    createdByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    createdByLabel.BorderSizePixel = 0
+    createdByLabel.TextScaled = true -- Scale text for better appearance
+    createdByLabel.Parent = mainFrame
 
     -- Return the sidebar and main frame for creating tabs
     return screenGui, sidebar, mainFrame
