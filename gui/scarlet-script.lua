@@ -12,6 +12,7 @@ This gui Works For Pc And Mobile
 
 ]]--
 -- Scarlet Script Customizable GUI Library with Tabs (Permanent label "Created by Scarlet Script")
+-- Scarlet Script Customizable GUI Library with Tabs
 
 local GUILibrary = {}
 
@@ -105,7 +106,6 @@ function GUILibrary:CreateTab(tabName, sidebar, mainFrame)
         tabContent.Visible = true
     end)
 
-    -- Return the content frame for adding buttons
     return tabContent
 end
 
@@ -136,6 +136,13 @@ function GUILibrary:RenameGUI(newTitle)
         if title then
             title.Text = newTitle
         end
+    end
+end
+
+-- Function to show the first tab on start
+function GUILibrary:Initialize()
+    if #contentFrames > 0 then
+        contentFrames[1].Visible = true -- Show the first tab
     end
 end
 
