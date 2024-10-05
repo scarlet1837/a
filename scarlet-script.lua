@@ -8,7 +8,7 @@ gameroblox0
 Credits 
 scarletbackup#3582
 
-This gui Works For Pc And Mobile
+This gui Works For Pc And Mobile tho
 
 ]]--
 GUILibrary = {}
