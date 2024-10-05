@@ -74,18 +74,6 @@ function GUILibrary:CreateMainGUI(titleText)
     permanentLabel.BorderSizePixel = 0
     permanentLabel.Parent = mainFrame
 
-    -- New label at the bottom of the GUI
-    local bottomLabel = Instance.new("TextLabel")
-    bottomLabel.Size = UDim2.new(1, 0, 0, 20) -- Full width
-    bottomLabel.Position = UDim2.new(0, 0, 1, -20) -- Positioned at the bottom
-    bottomLabel.Text = "Additional Information Here"
-    bottomLabel.Font = Enum.Font.Gotham
-    bottomLabel.TextSize = 10 -- Reduced text size
-    bottomLabel.BackgroundTransparency = 1
-    bottomLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    bottomLabel.BorderSizePixel = 0
-    bottomLabel.Parent = mainFrame
-
     -- Return the sidebar and main frame for creating tabs
     return screenGui, sidebar, mainFrame
 end
