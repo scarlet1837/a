@@ -48,7 +48,7 @@ function GUILibrary:CreateMainGUI()
     title.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
-    title.Parent = mainFrame
+    title.Parent = mainFrame -- Set the parent to mainFrame so it moves with the GUI
 
     -- Sidebar for navigation
     local sidebar = Instance.new("Frame")
