@@ -40,7 +40,8 @@ function GUILibrary:CreateMainGUI(titleText)
 
     -- Title label
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, -40, 0, 30)
+    title.Size = UDim2.new(1, 0, 0, 30) -- Make the width 100%
+    title.Position = UDim2.new(0, 0, 0, 0) -- Position it at the top
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
     title.TextSize = 18
