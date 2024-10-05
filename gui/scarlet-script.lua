@@ -26,7 +26,7 @@ function GUILibrary:CreateMainGUI(titleText)
 
     -- Main frame
     local mainFrame = Instance.new("Frame")
-    mainFrame.Size = UDim2.new(0, 400, 0, 300)
+    mainFrame.Size = UDim2.new(0, 400, 0, 300) -- Height of 300
     mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
     mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     mainFrame.BorderSizePixel = 0
@@ -72,7 +72,6 @@ function GUILibrary:CreateMainGUI(titleText)
     createdByLabel.BackgroundTransparency = 1
     createdByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
     createdByLabel.BorderSizePixel = 0
-    createdByLabel.TextScaled = true -- Scale text for better appearance
     createdByLabel.Parent = mainFrame
 
     -- Return the sidebar and main frame for creating tabs
