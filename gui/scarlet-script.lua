@@ -38,30 +38,29 @@ function GUILibrary:CreateMainGUI(titleText)
     mainFrameCorner.CornerRadius = UDim.new(0, 10)
     mainFrameCorner.Parent = mainFrame
 
-    -- Permanent "Created by Scarlet" label above the main frame
-    local permanentLabel = Instance.new("TextLabel")
-    permanentLabel.Size = UDim2.new(0, 400, 0, 20) -- Adjust size to match the main frame
-    permanentLabel.Position = UDim2.new(0.5, -200, 0, 10) -- Centered above the main frame
-    permanentLabel.AnchorPoint = Vector2.new(0.5, 0) -- Center horizontally, anchor to the top
-    permanentLabel.Text = "Created by Scarlet"
-    permanentLabel.Font = Enum.Font.Gotham
-    permanentLabel.TextSize = 14  -- Text size for visibility
-    permanentLabel.BackgroundTransparency = 1
-    permanentLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White color for better visibility
-    permanentLabel.BorderSizePixel = 0
-    permanentLabel.Parent = screenGui
-
-    -- Title label
+    -- Title label in the top left corner
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 30) -- Make the width 100%
-    title.Position = UDim2.new(0, 0, 0, 0) -- Position it at the top of the main frame
+    title.Size = UDim2.new(0, 200, 0, 30) -- Adjust size as needed
+    title.Position = UDim2.new(0, 10, 0, 10) -- Position it in the top-left corner
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
     title.TextSize = 18
-    title.BackgroundColor3 = Color3.fromRGB(24, 24, 34)
+    title.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
     title.Parent = mainFrame
+
+    -- "Created by Scarlet" label below the title
+    local creatorLabel = Instance.new("TextLabel")
+    creatorLabel.Size = UDim2.new(0, 200, 0, 20) -- Adjust size as needed
+    creatorLabel.Position = UDim2.new(0, 10, 0, 40) -- Position it below the title
+    creatorLabel.Text = "Created by Scarlet"
+    creatorLabel.Font = Enum.Font.Gotham
+    creatorLabel.TextSize = 14 -- Smaller text size for creator label
+    creatorLabel.BackgroundTransparency = 1
+    creatorLabel.TextColor3 = Color3.fromRGB(200, 200, 200) -- Light gray color for better contrast
+    creatorLabel.BorderSizePixel = 0
+    creatorLabel.Parent = mainFrame
 
     -- Sidebar for navigation
     local sidebar = Instance.new("Frame")
