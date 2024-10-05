@@ -62,6 +62,32 @@ function GUILibrary:CreateMainGUI(titleText)
         screenGui:Destroy()  -- Close the GUI when the button is clicked
     end)
 
+    -- Enable dragging of the main frame
+    local dragging
+    local dragInput
+    local startPos
+    local startMousePos
+
+    title.MouseButton1Down:Connect(function(mouse)
+        dragging = true
+        startMousePos = Vector2.new(mouse.X, mouse.Y)
+        startPos = mainFrame.Position
+
+        dragInput = game:GetService("RunService").RenderStepped:Connect(function()
+            if dragging then
+                local delta = Vector2.new(mouse.X, mouse.Y) - startMousePos
+                mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
+    end)
+
+    title.MouseButton1Up:Connect(function()
+        dragging = false
+        if dragInput then
+            dragInput:Disconnect()
+        end
+    end)
+
     -- Sidebar for navigation
     local sidebar = Instance.new("Frame")
     sidebar.Size = UDim2.new(0, 100, 1, -30)
