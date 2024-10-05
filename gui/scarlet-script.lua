@@ -62,18 +62,6 @@ function GUILibrary:CreateMainGUI(titleText)
     sidebarCorner.CornerRadius = UDim.new(0, 10)
     sidebarCorner.Parent = sidebar
 
-    -- Permanent "Created by Scarlet Script" label
-    local permanentLabel = Instance.new("TextLabel")
-    permanentLabel.Size = UDim2.new(1, 0, 0, 20)
-    permanentLabel.Position = UDim2.new(0, 0, 1, -20) -- Positioned at the bottom
-    permanentLabel.Text = "Created by Scarlet Script"
-    permanentLabel.Font = Enum.Font.Gotham
-    permanentLabel.TextSize = 10  -- Reduced text size
-    permanentLabel.BackgroundTransparency = 1
-    permanentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    permanentLabel.BorderSizePixel = 0
-    permanentLabel.Parent = mainFrame
-
     -- Return the sidebar and main frame for creating tabs
     return screenGui, sidebar, mainFrame
 end
@@ -109,6 +97,18 @@ function GUILibrary:CreateTab(tabName, sidebar, mainFrame)
     tabContent.Parent = mainFrame
     tabContent.Visible = false
 
+    -- Permanent "Created by Scarlet Script" label at the top of the tab content
+    local permanentLabel = Instance.new("TextLabel")
+    permanentLabel.Size = UDim2.new(1, 0, 0, 20)
+    permanentLabel.Position = UDim2.new(0, 0, 0, 0) -- Positioned at the top of the content frame
+    permanentLabel.Text = "Created by Scarlet Script"
+    permanentLabel.Font = Enum.Font.Gotham
+    permanentLabel.TextSize = 10  -- Reduced text size
+    permanentLabel.BackgroundTransparency = 1
+    permanentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    permanentLabel.BorderSizePixel = 0
+    permanentLabel.Parent = tabContent
+
     -- Store the tab and content frame
     table.insert(tabs, tabButton)
     table.insert(contentFrames, tabContent)
@@ -128,7 +128,7 @@ end
 function GUILibrary:CreateButton(text, parent, callback)
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0, 200, 0, 40)
-    button.Position = UDim2.new(0, 10, 0, (#parent:GetChildren() * 50) + 10) -- Automatically space buttons and add extra padding
+    button.Position = UDim2.new(0, 10, 0, (#parent:GetChildren() * 50) + 30) -- Adjusted to leave space for the label
     button.Text = text
     button.Font = Enum.Font.Gotham
     button.TextSize = 14
@@ -150,7 +150,7 @@ function GUILibrary:CreateButton(text, parent, callback)
     -- Update the CanvasSize of the scroll frame based on the number of buttons
     local scrollFrame = parent
     local buttonCount = #scrollFrame:GetChildren()
-    scrollFrame.CanvasSize = UDim2.new(0, 0, 0, buttonCount * 50 + 20)  -- Update canvas size
+    scrollFrame.CanvasSize = UDim2.new(0, 0, 0, buttonCount * 50 + 50)  -- Update canvas size to account for label space
 end
 
 -- Function to rename the GUI title
