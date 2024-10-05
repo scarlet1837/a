@@ -52,11 +52,11 @@ function GUILibrary:CreateMainGUI(titleText)
 
     -- Title label
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 30) -- Full width for the title
+    title.Size = UDim2.new(1, 0, 0, 40) -- Increased height to 40
     title.Position = UDim2.new(0, 0, 0, 20) -- Position it below the created by label
     title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
-    title.TextSize = 18
+    title.TextSize = 20 -- Increased text size for better visibility
     title.BackgroundColor3 = Color3.fromRGB(24, 24, 34)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
