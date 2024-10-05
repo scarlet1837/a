@@ -1,17 +1,3 @@
--[[ 
-Discord server
-https://discord.gg/pTmc8uEqJr
-
-YouTube channel
-gameroblox0
-
-Credits 
-scarletbackup#3582
-
-This gui Works For Pc And Mobile tho
-
-]]--
-
 local GUILibrary = {}
 
 -- Table to store the current GUI elements
@@ -43,7 +29,7 @@ function GUILibrary:CreateMainGUI(titleText)
     local title = Instance.new("TextLabel")
     title.Size = UDim2.new(1, 0, 0, 30) -- Make the width 100%
     title.Position = UDim2.new(0, 0, 0, 0) -- Position it at the top
-    title.Text = titleText or "scarlet script"
+    title.Text = titleText or "UI Lib"
     title.Font = Enum.Font.GothamBold
     title.TextSize = 18
     title.BackgroundColor3 = Color3.fromRGB(24, 24, 34)
