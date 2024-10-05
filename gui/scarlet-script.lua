@@ -30,6 +30,8 @@ function GUILibrary:CreateMainGUI(titleText)
     mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
     mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true -- Enable dragging
     mainFrame.Parent = screenGui
 
     local mainFrameCorner = Instance.new("UICorner")
@@ -46,47 +48,6 @@ function GUILibrary:CreateMainGUI(titleText)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.BorderSizePixel = 0
     title.Parent = mainFrame
-
-    -- Close button (X)
-    local closeButton = Instance.new("TextButton")
-    closeButton.Size = UDim2.new(0, 30, 0, 30)
-    closeButton.Position = UDim2.new(1, -30, 0, 0)
-    closeButton.Text = "X"
-    closeButton.Font = Enum.Font.Gotham
-    closeButton.TextSize = 14
-    closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    closeButton.Parent = title
-
-    closeButton.MouseButton1Click:Connect(function()
-        screenGui:Destroy()  -- Close the GUI when the button is clicked
-    end)
-
-    -- Enable dragging of the main frame
-    local dragging
-    local dragInput
-    local startPos
-    local startMousePos
-
-    title.MouseButton1Down:Connect(function(mouse)
-        dragging = true
-        startMousePos = Vector2.new(mouse.X, mouse.Y)
-        startPos = mainFrame.Position
-
-        dragInput = game:GetService("RunService").RenderStepped:Connect(function()
-            if dragging then
-                local delta = Vector2.new(mouse.X, mouse.Y) - startMousePos
-                mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-            end
-        end)
-    end)
-
-    title.MouseButton1Up:Connect(function()
-        dragging = false
-        if dragInput then
-            dragInput:Disconnect()
-        end
-    end)
 
     -- Sidebar for navigation
     local sidebar = Instance.new("Frame")
