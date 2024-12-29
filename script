@@ -1,0 +1,3 @@
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e7b50e83a3d591eda13e7360a958ef79.lua"))()
+
+scarlet server : https://discord.gg/pTmc8uEqJr
